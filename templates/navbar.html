@@ -1,0 +1,52 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Wedding Invites</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            Invitation
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'create_invitation' %}">Create a new
+                                invitation</a></li>
+                            <li><a class="dropdown-item" href="{% url 'list-invitation' %}">List of invitations</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            Guest
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'create-guest' %}">Create a new
+                                guest</a></li>
+                            <li><a class="dropdown-item" href="{% url 'list-guest' %}">List of guests</a></li>
+                        </ul>
+                    </li>
+
+                    </ul>
+                {% endif %}
+            {% if user.is_authenticated %}
+                <div class="ms-auto">
+                    <a href="{% url 'logout' %}" class="btn btn-outline-danger">Logout</a>
+                    {% else %}
+                </div>
+                <div class="ms-auto">
+                    <a href="{% url 'login' %}" class="btn btn-outline-success">Login</a>
+                    <a href="{% url 'create-user' %}" class="btn btn-outline-secondary">Sign Up</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</nav>

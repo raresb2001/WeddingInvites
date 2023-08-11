@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} List of guests {% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            {% for guest in all_guests %}
+                <div class="col-md-4 py-1">
+                    <div class="card row gx-2 gy-0">
+                        {% if guest.profile %}
+                            <img src="{{ guest.profile.url }}" class="card-img-top" height="300" width="100"
+                                 alt="Profile">
+                        {% else %}
+                            <img src="{% static "images/profile_picture.png" %}" class="card-img-top" height="300"
+                                 width="100" alt="Default image">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ guest.first_name }} {{ guest.last_name }}</h5>
+                            <h5 class="card-title">Name of invitation: {{ guest.invitation }}</h5>
+                        </div>
+
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                    More actions
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item"
+                                           href="{% url 'update-guest' guest.id %}">Update</a></li>
+                                    <li><a class="dropdown-item"
+                                           href="{% url 'delete-guest' guest.id %}">Delete</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
