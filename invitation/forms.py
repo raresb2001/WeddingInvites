@@ -15,7 +15,6 @@ class InvitationForm(forms.ModelForm):
             'date': TextInput(attrs={'class': 'form-control', 'type': 'date'}),
             'venue': TextInput(attrs={'class': 'form-control', 'placeholder': 'Please enter the venue location'}),
             'dress_code': TextInput(attrs={'class': 'form-control', 'placeholder': 'Please enter your wedding dresscode'}),
-
         }
 
 
